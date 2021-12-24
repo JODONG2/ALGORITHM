@@ -9,7 +9,7 @@ compare_num_list = list(map(int,input().split()))
 for m in range(M):
     compare_num = compare_num_list[m]
     try:
-        di[compare_num] 
+        di[compare_num]
         print(1)
     except:
         print(0)
