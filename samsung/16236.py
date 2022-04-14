@@ -39,7 +39,7 @@ input
 from collections import deque 
 def move(x,y,fish,space,n): 
     t=0 
-    position = deque([(x,y,t)]) # x, y, time 
+    position = deque([(x,y,t)]) 
     check = [[True for _ in range(n)] for _ in range(n)]
     check[x][y] = False 
     dx = [-1,0,0,1]
@@ -48,7 +48,7 @@ def move(x,y,fish,space,n):
     cnt = 0
     time = deque()
     answer = 0 
-    while fish and size > fish[0] and position : #TODO: fish 크기 순으로 안빼도 되나?
+    while fish and size > fish[0] and position : 
         if t == position[0][2] or not time :
             x,y,t = position.popleft()
             for px,py in zip(dx,dy):
