@@ -1,5 +1,3 @@
-
-
 def check(film):
     for i in range(w):
         cnta = 0 
@@ -44,6 +42,7 @@ def inject(film,d,w,k,cnt,index):
 tc = int(input())
 for t in range(1,tc+1):
     d,w,k = map(int,input().split()) 
+        
     film = [list(map(int,input().split())) for _ in range(d)]
     answer=float('inf')
     inject(film,d,w,k,0,-1)
