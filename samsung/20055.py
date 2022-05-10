@@ -18,81 +18,81 @@ i번 칸의 내구도는 Ai이다.
 
 종료되었을 때 몇 번째 단계가 진행 중이었는지 구해보자. 가장 처음 수행되는 단계는 1번째 단계이다.
 """
-# from collections import deque 
-# robot_key = 1 
-# def f1 (belt1,belt2,robot,n):
-#     belt2.appendleft(belt1.pop())
-#     belt1.appendleft(belt2.pop())
-#     if belt1[n-1][1] != 0 : 
-#         del robot[belt1[n-1][1]]
-#         belt1[n-1][1] = 0
-#     key_list = list(robot.keys()) 
-#     for key in key_list :
-#         robot[key] +=1
-#         if robot[key]+1 == n-1 and belt1[robot[key]+1][0] > 0 : 
-#             belt1[robot[key]+1][0] -= 1 
-#             belt1[robot[key]][1] = 0 
-#             del robot[key] 
-#         elif robot[key]+1 < n and belt1[robot[key]+1][1] == 0 and belt1[robot[key]+1][0] != 0 :
-#             belt1[robot[key]][1] = 0 
-#             belt1[robot[key]+1][1] = key 
-#             belt1[robot[key]+1][0] -= 1 
-#             robot[key] +=1 
+from collections import deque 
+robot_key = 1 
+def f1 (belt1,belt2,robot,n):
+    belt2.appendleft(belt1.pop())
+    belt1.appendleft(belt2.pop())
+    if belt1[n-1][1] != 0 : 
+        del robot[belt1[n-1][1]]
+        belt1[n-1][1] = 0
+    key_list = list(robot.keys()) 
+    for key in key_list :
+        robot[key] +=1
+        if robot[key]+1 == n-1 and belt1[robot[key]+1][0] > 0 : 
+            belt1[robot[key]+1][0] -= 1 
+            belt1[robot[key]][1] = 0 
+            del robot[key] 
+        elif robot[key]+1 < n and belt1[robot[key]+1][1] == 0 and belt1[robot[key]+1][0] != 0 :
+            belt1[robot[key]][1] = 0 
+            belt1[robot[key]+1][1] = key 
+            belt1[robot[key]+1][0] -= 1 
+            robot[key] +=1 
         
 
-# # def f2 (belt1,robot):
-# #     key_list = list(robot.keys())
-# #     # key_list.sort() 
-# #     for key in key_list : 
-# #         y = robot[key]
-# #         if y+1 == n-1 and belt1[y+1][0] > 0 : 
-# #             del robot[key] 
-# #             belt1[y][1] = 0 
-# #             belt1[y+1][0] -= 1
-# #         elif y+1 < n and belt1[y+1][1] == 0 and belt1[y+1][0] != 0: 
-# #             robot[key] = y+1 
-# #             belt1[y][1] = 0 
-# #             belt1[y+1][1] = key
-# #             belt1[y+1][0] -= 1 
+# def f2 (belt1,robot):
+#     key_list = list(robot.keys())
+#     # key_list.sort() 
+#     for key in key_list : 
+#         y = robot[key]
+#         if y+1 == n-1 and belt1[y+1][0] > 0 : 
+#             del robot[key] 
+#             belt1[y][1] = 0 
+#             belt1[y+1][0] -= 1
+#         elif y+1 < n and belt1[y+1][1] == 0 and belt1[y+1][0] != 0: 
+#             robot[key] = y+1 
+#             belt1[y][1] = 0 
+#             belt1[y+1][1] = key
+#             belt1[y+1][0] -= 1 
 
-# def f3 (belt1,robot):
-#     if belt1[0][0] != 0 : 
-#         global robot_key 
-#         belt1[0][0] -=1 
-#         belt1[0][1] = robot_key 
-#         robot[robot_key] = 0
-#         robot_key += 1
+def f3 (belt1,robot):
+    if belt1[0][0] != 0 : 
+        global robot_key 
+        belt1[0][0] -=1 
+        belt1[0][1] = robot_key 
+        robot[robot_key] = 0
+        robot_key += 1
         
     
-# def f4 (belt1,belt2,k):
-#     for b1,b2 in zip(belt1,belt2): 
-#         if b1[0] <= 0 : 
-#             k -= 1
-#             if k == 0 : return False 
-#         if b2[0] <= 0 :
-#             k-= 1 
-#             if k==0 : return False 
-#     return True 
+def f4 (belt1,belt2,k):
+    for b1,b2 in zip(belt1,belt2): 
+        if b1[0] <= 0 : 
+            k -= 1
+            if k == 0 : return False 
+        if b2[0] <= 0 :
+            k-= 1 
+            if k==0 : return False 
+    return True
 
-# if __name__ == "__main__":
-#     n,k = map(int,input().split()) 
-#     belt_temp = list(map(int,input().split())) 
-#     belt = [[a,0] for a in belt_temp]
-#     len_belt = len(belt)
-#     belt1 = deque(belt[:len_belt//2])
-#     belt2 = deque(belt[len_belt//2:])
-#     answer = 0 
-#     robot = {}
-#     while True : 
-#         f1(belt1,belt2,robot,n)
-#         # f2(belt1, robot)
-#         f3(belt1,robot)
-#         if f4(belt1,belt2,k) :
-#             answer +=1 
-#         else:
-#             answer+=1
-#             break 
-#     print(answer)
+if __name__ == "__main__":
+    n,k = map(int,input().split()) 
+    belt_temp = list(map(int,input().split())) 
+    belt = [[a,0] for a in belt_temp]
+    len_belt = len(belt)
+    belt1 = deque(belt[:len_belt//2])
+    belt2 = deque(belt[len_belt//2:])
+    answer = 0 
+    robot = {}
+    while True : 
+        f1(belt1,belt2,robot,n)
+        # f2(belt1, robot)
+        f3(belt1,robot)
+        if f4(belt1,belt2,k) :
+            answer +=1 
+        else:
+            answer+=1
+            break 
+    print(answer)
 
 """
 3 2
@@ -104,29 +104,3 @@ i번 칸의 내구도는 Ai이다.
 4 5
 10 1 10 6 3 4 8 2
 """
-import sys 
-input = sys.stdin.readline 
-from collections import deque 
-n, k = map(int, input().split()) 
-belt = deque(list(map(int, input().split()))) 
-robot = deque([0]*n) 
-res = 0 
-while 1: 
-    belt.rotate(1) 
-    robot.rotate(1) 
-    robot[-1]=0 #로봇이 내려가는 부분이니 0 
-    if sum(robot): #로봇이 존재하면 
-        for i in range(n-2, -1, -1): #로봇 내려가는 부분 인덱스 i-1 이므로 그 전인 i-2부터 
-            if robot[i] == 1 and robot[i+1] == 0 and belt[i+1]>=1: 
-                robot[i+1] = 1 
-                robot[i] = 0 
-                belt[i+1] -= 1 
-        robot[-1]=0 #이 부분도 로봇 out -> 0임 
-    if robot[0] == 0 and belt[0]>=1: 
-        robot[0] = 1 
-        belt[0] -= 1 
-    res += 1 
-    if belt.count(0) >= k: 
-        break 
-print(res)
-
