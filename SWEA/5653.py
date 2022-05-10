@@ -22,7 +22,6 @@ def hour(position, position_state):
                         position_state[str(nx)+','+str(ny)] = [0,life,life]
                         new_key.append(str(nx)+','+str(ny))
                     elif position[str(nx)+','+str(ny)][3] and position[str(nx)+',' + str(ny)][2] < life : 
-                        print("<<<>>>")
                         position[str(nx)+',' + str(ny)][2] = life 
                         position_state[str(nx)+','+str(ny)] = [0,life, life]
                     
@@ -44,7 +43,6 @@ if __name__ == "__main__":
         #비활성 False X시간이 지나면 -> 활성 
         # position state[ij] = True (0,time,time) -> (1, time,time) -> (2,0,0)
         # position[ij] = i,j,생명력수치 = time 
-        # world_first = [list(map(int,input().split())) for _ in range(n)]
         position = {}
         position_state = {} 
         world_first = [] 
@@ -55,22 +53,11 @@ if __name__ == "__main__":
                     position[str(i)+','+str(j)] = [i,j,temp[j],False]
                     position_state[str(i)+','+str(j)] = [0,temp[j],temp[j]]
             world_first.append(temp)
-        # for i in range(n):
-        #     for j in range(m): 
-        #         if world_first[i][j] : 
-        #             position[str(i)+','+str(j)] = [i,j,world_first[i][j],False]
-        #             position_state[str(i)+','+str(j)] = [0,world_first[i][j],world_first[i][j]]
-        # print(position)
+
         diffusion(position,position_state,k) 
         answer = len(position_state.keys())
         print(f"#{t1} {answer}")
-        # answer2 = 0 
-        # for k in position_state.keys(): 
-        #     if position_state[k][0] == 1 or position_state[k][0] == 0 : 
-        #         answer2+=1
-        # answer2_list.append(answer2)
-        # answer_list.append(answer)
-    # print(answer_list ,"<<<<")
+        
 """
 
 2
