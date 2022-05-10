@@ -1,13 +1,6 @@
 import sys 
 import heapq 
-nodes,targets = map(int,sys.stdin.readline().split())
-graph = [[] for _ in range(nodes+1)]
-for _ in range(nodes-1) : 
-    start,end,cost = map(int,sys.stdin.readline().split())
-    graph[start].append((end,cost))
-    graph[end].append((start,cost))
 
-distance = [[float('inf') for _ in range(nodes+1)]for _ in range(nodes+1)]
 def dijkstra(start,target):
     if not distance[start][start] != float('inf') :
         q = [] 
@@ -23,7 +16,25 @@ def dijkstra(start,target):
                     heapq.heappush(q,(distance[start][dest], dest))
     return distance[start][target]
 
+nodes,targets = map(int,sys.stdin.readline().split())
+graph = [[] for _ in range(nodes+1)]
+for _ in range(nodes-1) : 
+    start,end,cost = map(int,sys.stdin.readline().split())
+    graph[start].append((end,cost))
+    graph[end].append((start,cost))
+
+distance = [[float('inf') for _ in range(nodes+1)]for _ in range(nodes+1)]
+
 for _ in range(targets):
     start,target = map(int,sys.stdin.readline().split()) 
     print(dijkstra(start,target))
 
+"""
+4 2
+2 1 2
+4 3 2
+1 4 3
+1 2
+3 2
+1 3
+"""
