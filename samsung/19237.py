@@ -49,7 +49,7 @@ def shark_move(shark_position,shark_pri, shark_dir,space):
     #n x n m마리 k초동안 냄새 유지
     # for t in range(2):
     t = 0 
-    while t<=1001 and len(shark_position) >1 : 
+    while t<=1000 and len(shark_position) >1 : 
         t+=1
         temp_space = [[0 for _ in range(n)] for _ in range(n)]
         len_shark_list = len(shark_position)
@@ -74,7 +74,6 @@ def shark_move(shark_position,shark_pri, shark_dir,space):
                     else : 
                         if temp_space[nx][ny] < key : 
                             del shark_position[key]
-                            
                         else : 
                             del shark_position[temp_space[nx][ny]]
                             temp_space[nx][ny] = key

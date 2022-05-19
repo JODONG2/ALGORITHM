@@ -89,6 +89,7 @@ def shark_move(shark_position,space):
     return ret 
 
 shark_position = [0,0,fish_dic[space[0][0]][2]]
+
 print(shark_move(shark_position,space))
 
 
