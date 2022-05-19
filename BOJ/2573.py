@@ -29,6 +29,7 @@ def bfs(land,y,x,con):
 
 answer = []
 for _ in range(1):
+
     
     N,M = map(int,input().split())
 
@@ -57,7 +58,7 @@ for _ in range(1):
                     break
             if finish :
                 break
-        
+
         if finish :
             #print(y)
             answer.append(y)
