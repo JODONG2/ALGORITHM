@@ -12,15 +12,14 @@ for _ in range(m):
 def dijkstra(start,goal):
     q = [] 
     distance=[float('inf') for _ in range(n)] 
+    distance[start] = 0 
     heapq.heappush(q,(0,start)) 
 
     while q :
         dist,now = heapq.heappop(q)
         if distance[now] < dist : 
             continue 
-        for dest,d in graph[now]:
-            if d == start:
-                continue 
+        for dest,d in graph[now]: 
             if distance[dest] > d + dist :
                 distance[dest] = d+dist 
                 heapq.heappush(q,(distance[dest],dest))

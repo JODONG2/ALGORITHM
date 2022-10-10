@@ -1,0 +1,94 @@
+"""
+
+N×N크기의 땅이 있고, 땅은 1×1개의 칸으로 나누어져 있다. 각각의 땅에는 나라가 하나씩 존재하며,
+r행 c열에 있는 나라에는 A[r][c]명이 살고 있다. 인접한 나라 사이에는 국경선이 존재한다. 
+모든 나라는 1×1 크기이기 때문에, 모든 국경선은 정사각형 형태이다.
+
+TODO:
+국경선을 공유하는 두 나라의 인구 차이가 L명 이상, R명 이하라면, 두 나라가 공유하는 국경선을 오늘 하루 동안 연다.
+위의 조건에 의해 열어야하는 국경선이 모두 열렸다면, 인구 이동을 시작한다.
+국경선이 열려있어 인접한 칸만을 이용해 이동할 수 있으면, 그 나라를 오늘 하루 동안은 연합이라고 한다.
+연합을 이루고 있는 각 칸의 인구수는 (연합의 인구수) / (연합을 이루고 있는 칸의 개수)가 된다. 편의상 소수점은 버린다.
+연합을 해체하고, 모든 국경선을 닫는다.
+
+각 나라의 인구수가 주어졌을 때, 인구 이동이 TODO: 며칠 동안 발생하는지 구하는 프로그램을 작성하시오.
+
+첫째 줄에 N, L, R이 주어진다. (1 ≤ N ≤ 50, 1 ≤ L ≤ R ≤ 100)
+
+둘째 줄부터 N개의 줄에 각 나라의 인구수가 주어진다. r행 c열에 주어지는 정수는 A[r][c]의 값이다. (0 ≤ A[r][c] ≤ 100)
+
+인구 이동이 발생하는 일수가 2,000번 보다 작거나 같은 입력만 주어진다.
+
+"""
+
+n, l, r = map(int, input().split()) 
+world = [list(map(int,input().split())) for _ in range(n)]
+temp_world = [[0 for _ in range(n)] for _ in range(n)]
+
+from collections import deque
+
+def copy_check (arr,arr2):
+    ret = False 
+    for i in range(n):
+        for j in range(n):
+            if arr2[i][j] != arr[i][j] : 
+                ret = True 
+            arr2[i][j] = arr[i][j]
+    return ret 
+def func1():
+    dx = [0,0,-1,1]
+    dy = [1,-1,0,0]
+    TF = copy_check(world,temp_world)
+    day = 0
+    check = [[True for _ in range(n)] for _ in range(n)]
+    while TF : 
+        for i in range(n): 
+            for j in range(n):
+                if check[i][j]:
+                    cnt = 1 
+                    check[i][j] = False
+                    total = world[i][j]
+                    temp1 = deque() 
+                    temp = [(i,j)] 
+                    for px,py in zip(dx,dy): 
+                        if 0<=i+px<n and 0<=j+py<n and l<=abs(world[i][j] - world[i+px][j+py]) <=r:
+                            check[i][j] = False 
+                            cnt +=1 
+                            total += world[i+px][j+py]
+                            check[i+px][j+py] = False
+                            temp1.append((i+px,j+py))
+                            temp.append((i+px,j+py))
+                    while temp1 : 
+                        x,y = temp1.pop()
+                        for px,py in zip(dx,dy): 
+                            if 0<=x+px<n and 0<=y+py<n and check[x+px][y+py] and l<=abs(world[x][y] - world[x+px][y+py]) <=r:
+                                cnt+=1 
+                                total += world[x+px][y+py] 
+                                check[x+px][y+py] = False
+                                temp1.append((x+px,y+py))
+                                temp.append((x+px,y+py))
+                    for t in temp : 
+                        temp_world[t[0]][t[1]] = total//cnt
+                        check[t[0]][t[1]] = True 
+        TF = copy_check(temp_world,world)
+        if TF : day+=1
+    return day
+
+
+if __name__ == "__main__": 
+    print(func1() )
+    
+    
+"""
+2 20 50
+50 30
+20 40
+->1
+ 
+4 10 50
+10 100 20 90
+80 100 60 70
+70 20 30 40
+50 20 100 10
+->3
+"""

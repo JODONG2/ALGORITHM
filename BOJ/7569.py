@@ -3,7 +3,6 @@ from collections import deque
 M,N,H = map(int,input().split()) 
 
 box = [[list(map(int,sys.stdin.readline().split())) for _ in range(N)] for _ in range(H)]
-print(box)
 dx = [0,0,0,0,1,-1]
 dy = [1,-1,0,0,0,0]
 dz = [0,0,1,-1,0,0]

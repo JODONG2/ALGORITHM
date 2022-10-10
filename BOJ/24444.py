@@ -10,10 +10,10 @@ import sys
 from collections import deque 
 def bfs(s,seq):
     q = deque([s])
-    for g in graph :
-        g.sort()
+    
     while q : 
         now = q.popleft() 
+        graph[now].sort()
         for n in graph[now]:
             if visit[n]:
                 q.append(n)
