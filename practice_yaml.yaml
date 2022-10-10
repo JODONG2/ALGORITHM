@@ -1,0 +1,89 @@
+#yaml은 주석을 지원한다 !
+#문자열에 ' 는 선택사항이다 !
+#''로 감싸면 \n을 사용할 수 있다.
+#감싸지 않는다면 그냥 \n으로 읽는다.
+
+my name is: 'jodo\ng2'
+my name is2: jodo\ng2
+
+
+#긴 문장을 표현하고 싶다면 다음과 같이 > | 를 사용한다.
+#마지막에 \n을 포함하고 싶지 않다면 -를 사용한다.
+long string: >-
+ asdfasdfasdfasdf
+ asdfasdfasdfasdfadf
+#결과 asdfasdfasdfasdfasdfasdfasdfasdfadf
+
+long string2: |-
+ asdfasdfasdfasdf
+ asdfasdfasdfassdf
+
+ asdasd
+#결과 
+#asdfasdfasdfasdf
+#asdfasdfasdfassdf
+
+#asdasd
+
+#숫자로 인식가능하다면 숫자로 인식한다.
+#따옴표로 감싸면 무조건 문자열로 인식한다.
+number: 3
+number2: 3.123124
+number3: "3.1234"
+
+#true, false로 불리언값을 인식한다.
+
+tboolean: true
+fboolean: false
+
+#null 사용가능하다. null과 ~은 같다.
+null value: null 
+numm value2: ~ 
+
+
+#배열의 아이템은 - 로 구분한다. 
+# array[-1] == {'a':'b'}임
+#한줄로 쓸때는 []를 사용한다.
+#원소를 구분하기 위해 , 를 사용한다.
+array:
+  - apple
+  - banana 
+  - 12345
+  - a: b
+
+array2: [apple, banana, 12345, a: b]
+
+array3: [
+  apple,
+  banana,
+  12345,
+  a: b,
+]
+
+#객체는 들여쓰기와 : 로 구분한다.
+object:
+  name: jodong2
+  type: engineer
+  j:
+    d: onkey
+    o:
+      n: gineer
+      g: inginjara~
+    n: NG
+    g: GN
+
+arr_key_value:
+  - key1: value1
+  - key2: value2
+  - key3: value3
+  - key4: value4 
+
+arr_key_value2:
+  - key1: value1
+    key2: value2
+  - key3: value3
+    key4: value4
+
+
+        
+

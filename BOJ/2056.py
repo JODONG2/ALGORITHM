@@ -7,5 +7,15 @@ for job_num in range(1,n+1):
     for ne in need: 
        maxi_need = max(graph[ne], maxi_need) 
     graph[job_num] = maxi_need+time
-
 print(max(graph))
+
+"""
+7
+5 0
+3 0
+6 0
+1 0
+8 0
+4 0
+2 0
+"""

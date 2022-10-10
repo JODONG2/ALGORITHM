@@ -47,3 +47,4 @@ while True :
         maxi = max(maxi,height*width)
 
     print(maxi)
+
