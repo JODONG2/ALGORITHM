@@ -1,0 +1,21 @@
+import copy 
+dx = [0,0,1,-1]
+dy = [1,-1,0,0]
+
+def search(cheat,board,x,y,answer):
+    cheat2=copy.deepcopy(cheat)
+    cheat2[board[x][y]]=1 
+    for px,py in zip(dx,dy):
+        nx = x+px
+        ny = y+py
+        if 0<=nx<R and 0<=ny<C :
+            if cheat2.get(board[nx][ny]):
+                continue 
+            answer = max(answer, 1+search(cheat2,board,nx,ny,0))
+    return answer
+
+R,C = map(int,input().split()) 
+board = [list(input())for _ in range(R) ]
+cheat={}
+cheat[board[0][0]] = 1
+print(search(cheat,board,0,0,0)+1)
